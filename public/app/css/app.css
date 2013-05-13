@@ -34,3 +34,13 @@
     color: #aaa;
     font-size: 12px;
 }
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+}
+
+#timeline{
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+}

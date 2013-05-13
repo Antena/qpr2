@@ -33,7 +33,7 @@
             <div id="timeline">
                 <ul class="unstyled">
                     <li ng-repeat="event in eventsBefore(currentdate)">
-                        {{ event.date }}
+                        <!--{{ event.date }}-->
                     </li>
                 </ul>
             </div>
@@ -62,6 +62,7 @@
 <script>
     $(function() {
         console.log("loaded");        //TODO(gb): Remove trace!!!
+        timeline.create();
     })
 </script>
 

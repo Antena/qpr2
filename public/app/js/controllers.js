@@ -36,15 +36,22 @@ angular.module('qpr2.controllers', []).
         // Timeline events
         $scope.events = [
             { type: "article", data: $scope.articles[0], date: $scope.articles[0].date },
+            { type: "article", data: $scope.articles[1], date: $scope.articles[1].date },
             { type: "article", data: $scope.articles[1], date: $scope.articles[1].date }
         ]
 
         $scope.eventsBefore = function(date) {
             var currentDate = moment(date, "DD/MM/YYYY");
-            return $scope.events.filter(function(event) {
+
+            var events= $scope.events.filter(function(event) {
                 var eventDate = moment(event.date, "DD/MM/YYYY");
                 return eventDate.isBefore(currentDate) || eventDate.isSame(currentDate);
+
             });
+
+            timeline.update(events);
+
+            return events;
         }
 
     }])

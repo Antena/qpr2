@@ -2,10 +2,21 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+angular.module('qpr2.controllers', []).
+    controller('StoryController', ['$scope', function($scope) {
+        $scope.articles = [
+            { title: "Noticia 1", age: 0 },
+            { title: "Noticia 2", age: 1 }
+        ];
 
-  }])
-  .controller('MyCtrl2', [function() {
+        $scope.reports = [
+            { id: "66" }
+        ]
 
-  }]);
+        $scope.story = {
+            title: "Nombre del hotspot"
+        };
+    }])
+    .controller('MyCtrl2', [function() {
+
+    }]);

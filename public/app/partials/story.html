@@ -1,0 +1,54 @@
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>{{ story.title }}</h1>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10">
+            <p class="lead">{{ story.description }}</p>
+        </div>
+        <div class="span2">
+            <h5>Temas:</h5>
+            <ul class="unstyled">
+                <li ng-repeat="topic in topics">
+                    <span class="label {{ topic.labelClass }}">{{ topic.name }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span9">
+            <div id="map">
+
+            </div>
+            <div id="timeline">
+
+            </div>
+        </div>
+        <div class="span3">
+            <div id="entity-details">
+
+            </div>
+            <div class="floating-title">
+                <h5>Entidades relacionados</h5>
+                <i class="icon-chevron-down"></i>
+            </div>
+            <div class="realted-entities">
+                <ul class="unstyled">
+                    <li ng-repeat="article in articles" class="related-item">
+                        <p class="article-date">{{ article.date }}</p>
+                        <h6 class="article-title">{{ article.title }}</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -25,8 +25,17 @@
             <div id="map">
 
             </div>
-            <div id="timeline">
+            <select ng-model="currentdate">
+                <option ng-repeat="event in events" value="{{ event.date }}">{{ event.date }}</option>
+            </select>
 
+            <h6>Eventos hasta el: {{ currentdate }}</h6>
+            <div id="timeline">
+                <ul class="unstyled">
+                    <li ng-repeat="event in eventsBefore(currentdate)">
+                        {{ event.date }}
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="span3">

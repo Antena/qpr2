@@ -32,6 +32,21 @@ angular.module('qpr2.controllers', []).
             title: "Planta potabilizadora Almirante Brown",
             description: "En el taller de Monitoreo Social de la Cuenca Matanza-Riachuelo realizado el 25 de febrero de 2013 en la localidad de Almirante Brown, se reportó que se encontraban inconclusas las obras de una planta potabilizadora sita en Avda. Juan B. Justo y Virrey Ceballos, localidad de Glew, Partido de Almirante Brown, Buenos Aires. Esta situación traería como consecuencia la restricción al acceso a agua potable por parte de los vecinos de dicho lugar."
         };
+
+        // Timeline events
+        $scope.events = [
+            { type: "article", data: $scope.articles[0], date: $scope.articles[0].date },
+            { type: "article", data: $scope.articles[1], date: $scope.articles[1].date }
+        ]
+
+        $scope.eventsBefore = function(date) {
+            var currentDate = moment(date, "DD/MM/YYYY");
+            return $scope.events.filter(function(event) {
+                var eventDate = moment(event.date, "DD/MM/YYYY");
+                return eventDate.isBefore(currentDate) || eventDate.isSame(currentDate);
+            });
+        }
+
     }])
     .controller('MyCtrl2', [function() {
 

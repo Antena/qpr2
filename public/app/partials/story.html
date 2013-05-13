@@ -33,7 +33,7 @@
             <div id="timeline">
                 <ul class="unstyled">
                     <li ng-repeat="event in eventsUntil(currentdate) | orderBy:eventSorter">
-                        {{ event.date }}
+                        {{ event.type }} : {{ event.date }}
                     </li>
                 </ul>
             </div>

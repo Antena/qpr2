@@ -2,13 +2,14 @@
     mapper = {};
 
     var overlay, cartodb_imagemaptype,
-        map   = null,
-        user  = "examples",
-        table = "costa_rica_pa",
-        cat   = 'II',
-        zoom  = 14,
-        lat   = -34.857623,
-        lng   = -58.365984;
+        map     = null,
+        user    = "belbo",
+        table   = "qpr2",
+        cat     = 'II',
+        date    = '1900-05-13',
+        zoom    = 13,
+        lat     = -34.857623,
+        lng     = -58.365984;
 
     var resetLayer = function() {
         // Add the cartodb tiles
@@ -18,7 +19,7 @@
 
     var cartoDBLayer = {
         getTileUrl: function(coord, zoom) {
-            var sql   = "SELECT * FROM costa_rica_pa where iucn_cat = '" + cat + "'";
+            var sql   = "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
             return "https://"+user+".cartodb.com/tiles/"+table+"/"+zoom+"/"+coord.x+"/"+coord.y+".png?sql=" + sql;
         },
         tileSize: new google.maps.Size(256, 256)
@@ -55,16 +56,11 @@
 
         // Add the CartoDB tiles
         map.overlayMapTypes.insertAt(0, new google.maps.ImageMapType(cartoDBLayer));
+    }
 
-        // Bind the buttons
-        $('.buttons button').click(function(){
-            $(this).focus();
-            cat = $(this).val();
-
-            $(this).closest('div').find('button.selected').removeClass('selected');
-            $(this).addClass('selected');
-
-            resetLayer();
-        });
+    mapper.setDate = function(currentDate) {
+        var currentDateParts = currentDate.split("/");
+        date = currentDateParts[2] + "-" + currentDateParts[1] + "-" + currentDateParts[0] + " 23:59:59";
+        resetLayer();
     }
 })()

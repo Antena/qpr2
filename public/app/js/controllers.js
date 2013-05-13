@@ -3,7 +3,11 @@
 /* Controllers */
 
 angular.module('qpr2.controllers', []).
-    controller('StoryController', ['$scope', function($scope) {
+    controller('StoryController', ['$scope', '$http', function($scope, $http) {
+        var
+            cartodbUrlHead  = "http://belbo.cartodb.com/api/v2/sql?q=",
+            dateFormat      = "DD/MM/YYYY";
+
         $scope.articles = [
             {
                 link: "http://www.argentina.ar/temas/pais/17693-aysa-a-7-anos-de-su-reestatizacion-avanza-con-su-plan-director",
@@ -39,13 +43,39 @@ angular.module('qpr2.controllers', []).
             { type: "article", data: $scope.articles[1], date: $scope.articles[1].date }
         ]
 
-        $scope.eventsBefore = function(date) {
-            var currentDate = moment(date, "DD/MM/YYYY");
+        var cartodbSql = "SELECT * FROM qpr2";
+        $http.get(cartodbUrlHead + encodeURIComponent(cartodbSql))
+            .success(function(data) {
+                var rows = data.rows;
+                for (var i=0; i<rows.length; i++) {
+                    //TODO(gb): fix this. Not sure why, but the formatted date is 1 day before. Hack: add 1 day
+                    var formattedDate = moment(rows[i].timestamp)
+                        .add("days", 1)
+                        .format("D/MM/YYYY");
+                    $scope.events.push($.extend(rows[i], {
+                        type: "geometry",
+                        date: formattedDate
+                    }));
+                }
+            });
+
+        $scope.eventsUntil = function(date) {
+            var currentDate = moment(date, dateFormat);
+
+            if (date) {
+                mapper.setDate(date);
+            }
+
             return $scope.events.filter(function(event) {
-                var eventDate = moment(event.date, "DD/MM/YYYY");
+                var eventDate = moment(event.date, dateFormat);
                 return eventDate.isBefore(currentDate) || eventDate.isSame(currentDate);
             });
         }
+
+        // Event Sorter
+        $scope.eventSorter = function(event) {
+            return moment(event.date, dateFormat).unix();
+        };
 
     }])
     .controller('MyCtrl2', [function() {

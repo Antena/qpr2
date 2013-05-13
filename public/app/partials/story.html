@@ -26,13 +26,13 @@
 
             </div>
             <select ng-model="currentdate">
-                <option ng-repeat="event in events" value="{{ event.date }}">{{ event.date }}</option>
+                <option ng-repeat="event in events | orderBy:eventSorter" value="{{ event.date }}">{{ event.date }}</option>
             </select>
 
             <h6>Eventos hasta el: {{ currentdate }}</h6>
             <div id="timeline">
                 <ul class="unstyled">
-                    <li ng-repeat="event in eventsBefore(currentdate)">
+                    <li ng-repeat="event in eventsUntil(currentdate) | orderBy:eventSorter">
                         {{ event.date }}
                     </li>
                 </ul>

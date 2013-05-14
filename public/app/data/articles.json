@@ -1,0 +1,48 @@
+[
+    {
+        "id": 101,
+        "source": "Argentina.ar",
+        "link": "http://www.argentina.ar/temas/pais/17693-aysa-a-7-anos-de-su-reestatizacion-avanza-con-su-plan-director",
+        "title": "AYSA: a 7 años de su reestatización, avanza con su plan director",
+        "date": "21/03/2013",
+        "description": "La empresa tiene previsto para el corriente año una inversión de 6.000 millones de pesos para finalizar cuatro obras de envergadura para la mejor prestación de servicio, en el marco de su plan director.",
+        "topics": [
+            {
+                "name": "AySA",
+                "labelClass": "label-inverse"
+            },
+            {
+                "name": "Plan director",
+                "labelClass": "label-inverse"
+            },
+            {
+                "name": "Inversión",
+                "labelClass": "label-inverse"
+            }
+        ]
+    },
+    {
+        "id": 102,
+        "source": "Portal Terra Noticias",
+        "link": "http://noticias.terra.com.ar/acuerdo-de-aysa-y-corporacion-andina-para-capacitar-cooperativas,7f272138a97bf210VgnVCM4000009bf154d0RCRD.html",
+        "title": "ACUERDO DE AYSA Y CORPORACION ANDINA PARA CAPACITAR COOPERATIVAS",
+        "date": "03/05/2011",
+        "description": "La Corporación Andina de Fomento (CAF) y la empresa Aguas y Saneamientos Argentinos Sociedad Anónima (AYSA) firmaron un convenio que le permitirá a la compañía estatal recibir fondos no reembolsables para la conformación y capacitación de cooperativas de trabajo, que beneficará a más de 1500 familias."
+    },
+    {
+        "id": 103,
+        "source": "Portal Terra Noticias",
+        "link": "http://noticias.terra.com.ar/aysa-invertira-25000-millones-de-pesos-para-brindar-servicios-de-agua-y-cloacas-en-toda-su-area-de-cobertura,07c6475ecd292310VgnVCM20000099f154d0RCRD.html",
+        "title": "AYSA invertirá 25.000 millones de pesos para brindar servicios de agua y cloacas en toda su área de cobertura",
+        "date": "22/09/2011",
+        "description": "La empresa estatal de Aguas y Saneamiento (AySA) presentó hoy su Plan Estratégico 2011/2020, período en el cual promete alcanzar el 100 por ciento de cobertura de servicios de agua potable y desagües cloacales a su área de concesión, con una inversión que totalizará los 25.000 millones de pesos."
+    },
+    {
+        "id": 104,
+        "source": "Secretaría de comunicación.",
+        "link": "http://www.prensa.argentina.ar/2013/03/05/38820-la-argentina-recibio-un-prestamo-para-obras-de-agua-potable.php",
+        "title": "La Argentina recibió un préstamo para obras de agua potable",
+        "date": "05/03/2013",
+        "description": "El Ministerio de Planificación informó que hoy el Banco de Desarrollo para América Latina (ex CAF) aprobó por unanimidad en su reunión de directorio, un préstamo destinado al Programa de Obras Básicas de Agua Potable 2012-2015 AySA (Fase 1), por un monto de 600 millones de pesos."
+    }
+]

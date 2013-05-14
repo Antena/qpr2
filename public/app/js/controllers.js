@@ -8,6 +8,8 @@ angular.module('qpr2.controllers', []).
             cartodbUrlHead  = "http://belbo.cartodb.com/api/v2/sql?q=",
             dateFormat      = "DD/MM/YYYY";
 
+        $scope.selected = null;
+
         $scope.articles = [
             {
                 link: "http://www.argentina.ar/temas/pais/17693-aysa-a-7-anos-de-su-reestatizacion-avanza-con-su-plan-director",
@@ -24,13 +26,23 @@ angular.module('qpr2.controllers', []).
         ];
 
         $scope.reports = [
-            { id: "66" }
-        ]
+            { id: "71" }
+        ];
 
         $scope.topics = [
             { name: "Planta Potabilizadora", labelClass: "label-info" },
             { name: "Obras Inconclusas", labelClass: "label-important" }
-        ]
+        ];
+
+        $scope.places = [{
+            cartodb_id: 1,
+            type: "industry",
+            name: "PETROLERA DEL CONOSUR S.A."
+        },{
+            cartodb_id: 3,
+            type: "landfill",
+            name: "Espora I"
+        }];
 
         $scope.story = {
             title: "Planta potabilizadora Almirante Brown",
@@ -42,22 +54,6 @@ angular.module('qpr2.controllers', []).
             { type: "article", data: $scope.articles[0], date: $scope.articles[0].date },
             { type: "article", data: $scope.articles[1], date: $scope.articles[1].date }
         ]
-
-        var cartodbSql = "SELECT * FROM qpr2";
-        $http.get(cartodbUrlHead + encodeURIComponent(cartodbSql))
-            .success(function(data) {
-                var rows = data.rows;
-                for (var i=0; i<rows.length; i++) {
-                    //TODO(gb): fix this. Not sure why, but the formatted date is 1 day before. Hack: add 1 day
-                    var formattedDate = moment(rows[i].timestamp)
-                        .add("days", 1)
-                        .format("D/MM/YYYY");
-                    $scope.events.push($.extend(rows[i], {
-                        type: "geometry",
-                        date: formattedDate
-                    }));
-                }
-            });
 
         $scope.eventsUntil = function(date) {
             var currentDate = moment(date, dateFormat);

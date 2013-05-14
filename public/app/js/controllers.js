@@ -8,6 +8,8 @@ angular.module('qpr2.controllers', []).
             cartodbUrlHead  = "http://belbo.cartodb.com/api/v2/sql?q=",
             dateFormat      = "DD/MM/YYYY";
 
+        $scope.selected = null;
+
         $scope.articles = [
             {
                 link: "http://www.argentina.ar/temas/pais/17693-aysa-a-7-anos-de-su-reestatizacion-avanza-con-su-plan-director",
@@ -24,13 +26,23 @@ angular.module('qpr2.controllers', []).
         ];
 
         $scope.reports = [
-            { id: "66" }
-        ]
+            { id: "71" }
+        ];
 
         $scope.topics = [
             { name: "Planta Potabilizadora", labelClass: "label-info" },
             { name: "Obras Inconclusas", labelClass: "label-important" }
-        ]
+        ];
+
+        $scope.places = [{
+            cartodb_id: 1,
+            type: "industry",
+            name: "PETROLERA DEL CONOSUR S.A."
+        },{
+            cartodb_id: 3,
+            type: "landfill",
+            name: "Espora I"
+        }];
 
         $scope.story = {
             title: "Planta potabilizadora Almirante Brown",
@@ -49,6 +61,7 @@ angular.module('qpr2.controllers', []).
             .success(function(data) {
                 var rows = data.rows;
                 for (var i=0; i<rows.length; i++) {
+                    console.log(rows[i]);
                     //TODO(gb): fix this. Not sure why, but the formatted date is 1 day before. Hack: add 1 day
                     var formattedDate = moment(rows[i].timestamp)
                         .add("days", 1)

@@ -1,15 +1,15 @@
 (function() {
     mapper = {};
 
-    var overlay, cartodb_imagemaptype,
-        map     = null,
-        user    = "belbo",
-        table   = "qpr2",
-        cat     = 'II',
-        date    = '1900-05-13',
-        zoom    = 13,
-        lat     = -34.857623,
-        lng     = -58.365984;
+    var
+        map             = null,
+        user            = "belbo",
+        table           = "qpr2",
+        date            = '1900-05-13',
+        cartodbLayer    = null,
+        zoom            = 13,
+        lat             = -34.857623,
+        lng             = -58.365984;
 
     var resetLayer = function() {
         // Add the cartodb tiles
@@ -17,13 +17,9 @@
         map.overlayMapTypes.pop(1);
     }
 
-    var cartoDBLayer = {
-        getTileUrl: function(coord, zoom) {
-            var sql   = "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
-            return "https://"+user+".cartodb.com/tiles/"+table+"/"+zoom+"/"+coord.x+"/"+coord.y+".png?sql=" + sql;
-        },
-        tileSize: new google.maps.Size(256, 256)
-    };
+    var sqlQuery = function() {
+        return "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
+    }
 
     mapper.init = function(divId, settings) {
         // Define the basic map options
@@ -54,13 +50,28 @@
         // Set the map style
         map.setOptions({ styles: mapStyle });
 
-        // Add the CartoDB tiles
-        map.overlayMapTypes.insertAt(0, new google.maps.ImageMapType(cartoDBLayer));
+        // Add the CartoDB tiles. See: http://belbo.cartodb.com/api/v1/viz/qpr2/viz.json
+        cartodb.createLayer(map, {
+            type : "cartodb",
+            options: {
+                user_name : "belbo",
+                table_name : "qpr2",
+                query: sqlQuery(),
+                interactivity: 'cartodb_id,type',
+                featureClick : function(e, latlng, pos, data) {
+                    qpr2.select(data);
+                }
+            }
+
+        }, function(layer) {
+            cartodbLayer = layer;
+            map.overlayMapTypes.setAt(0, layer);
+        });
     }
 
     mapper.setDate = function(currentDate) {
         var currentDateParts = currentDate.split("/");
         date = currentDateParts[2] + "-" + currentDateParts[1] + "-" + currentDateParts[0] + " 23:59:59";
-        resetLayer();
+        cartodbLayer.setQuery(sqlQuery());
     }
 })()

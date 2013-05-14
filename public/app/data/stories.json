@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Planta potabilizadora Almirante Brown",
+        "description": "En el taller de Monitoreo Social de la Cuenca Matanza-Riachuelo realizado el 25 de febrero de 2013 en la localidad de Almirante Brown, se reportó que se encontraban inconclusas las obras de una planta potabilizadora sita en Avda. Juan B. Justo y Virrey Ceballos, localidad de Glew, Partido de Almirante Brown, Buenos Aires. Esta situación traería como consecuencia la restricción al acceso a agua potable por parte de los vecinos de dicho lugar.",
+        "topics": [
+            {
+                "name": "Planta Potabilizadora",
+                "labelClass": "label-info"
+            },
+            {
+                "name": "Obras Inconclusas",
+                "labelClass": "label-important"
+            }
+        ]
+    }
+]

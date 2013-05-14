@@ -1,0 +1,38 @@
+[
+    {
+        "id": 301,
+        "cartodb_id": 10,
+        "geometry": "polygon",
+        "type": "industry",
+        "name": "Planta potabilizadora de Almirante Brown",
+        "address": "Av. República Argentina y Av. Juan B. Justo, de la localidad de Ministro Rivadavia, Almirante Brown.",
+        "link": "https://quepasariachuelo.crowdmap.com/reports/view/71"
+    },
+    {
+        "id": 302,
+        "cartodb_id": 11,
+        "geometry": "point",
+        "type": "industry",
+        "name": "PETROLERA DEL CONOSUR S.A.",
+        "address": "RUTA 210 21219 GLEW, ALMIRANTE BROWN",
+        "link": "http://quepasariachuelo.org.ar/industrias/29023790"
+    },
+    {
+        "id": 303,
+        "cartodb_id": 12,
+        "geometry": "point",
+        "type": "landfill",
+        "name": "Espora I",
+        "address": "Av. Espora entre Yapeyu y Juan B. Justo, Longchamps, Almirante Brown",
+        "link": "http://quepasariachuelo.org.ar/basurales/57"
+    },
+    {
+        "id": 304,
+        "cartodb_id": 13,
+        "geometry": "point",
+        "type": "landfill",
+        "name": "Espora II",
+        "address": "Av. Espora interseccion Ribera, Longchamps, Almirante Brown",
+        "link": "http://quepasariachuelo.org.ar/basurales/58"
+    }
+]

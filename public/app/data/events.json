@@ -1,0 +1,38 @@
+[
+    {
+        "step": 0,
+        "type": "milestone",
+        "date": "21/03/2013",
+        "data": "401"
+    },
+    {
+        "step": 1,
+        "type": "article",
+        "date": "03/05/2011",
+        "data": "102"
+    },
+    {
+        "step": 2,
+        "type": "article",
+        "date": "22/09/2011",
+        "data": "103"
+    },
+    {
+        "step": 3,
+        "type": "article",
+        "date": "05/03/2013",
+        "data": "104"
+    },
+    {
+        "step": 4,
+        "type": "article",
+        "date": "21/03/2013",
+        "data": "101"
+    },
+    {
+        "step": 5,
+        "type": "report",
+        "date": "21/03/2013",
+        "data": "201"
+    }
+]

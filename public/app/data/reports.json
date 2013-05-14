@@ -1,0 +1,70 @@
+[
+    {
+        "id": 201,
+        "date": "25/02/2013",
+        "report": {
+            "payload": {
+                "domain": "https://quepasariachuelo.crowdmap.com/",
+                "incidents": [
+                    {
+                        "incident": {
+                            "incidentid": "71",
+                            "incidenttitle": "Planta potabilizadora de Almirante Brown inconclusa",
+                            "incidentdescription": "Taller Almirante Brown 25 de Febrero de 2013:\n\nSe reportó en el Taller realizado el 25 de febrero de 2013, en la localidad de Almirante Brown, que se encontraban inconclusas las obras tendientes a la puesta en funcionamiento de una planta potabilizadora lo que impedía el acceso a agua potable por parte de vecinos de dicha localidad.\n\nCategoría: Agua – Obra paralizada.\nDatos secundarios: Se indicó como factor probable de la paralización de las obras la falta de suministro eléctrico.\nUbicación precisa: Av. República Argentina y Av. Juan B. Justo, de la localidad de Ministro Rivadavia, Almirante  Brown.\nEnlace/fuente de noticias:  -\nVideos/Fotos: Foto. Si.\nInformación personal (opcional): Juan Vegué",
+                            "incidentdate": "2013-05-13 13:48:00",
+                            "incidentmode": "1",
+                            "incidentactive": "1",
+                            "incidentverified": "0",
+                            "locationid": "71",
+                            "locationname": "Av. República Argentina y Av. Juan B. Justo, de la localidad de Ministro Rivadavia, Almirante  Brown.",
+                            "locationlatitude": "-34.859958",
+                            "locationlongitude": "-58.363784"
+                        },
+                        "categories": [
+                            {
+                                "category": {
+                                    "id": 37,
+                                    "title": "Obras paralizadas"
+                                }
+                            }
+                        ],
+                        "media": [
+                            {
+                                "id": 317,
+                                "type": 4,
+                                "link": "http://www.diariodelsurdelgba.com/index.php?option=com_content&view=article&catid=71:noticias-brown&id=7628:reclaman-un-plan-de-rescate-por-problemas-de-agua-en-varias-localidades",
+                                "thumb": null
+                            }
+                        ],
+                        "comments": [],
+                        "customfields": {
+                            "1": {
+                                "field_id": "1",
+                                "form_id": "1",
+                                "field_name": "descripcion",
+                                "field_type": "1",
+                                "field_default": null,
+                                "field_required": "1",
+                                "field_maxlength": "0",
+                                "field_height": "5",
+                                "field_width": "0",
+                                "field_isdate": "0",
+                                "field_ispublic_visible": "0",
+                                "field_ispublic_submit": "0",
+                                "field_response": "Planta potabilizadora en Glew, obra inconclusa."
+                            }
+                        }
+                    }
+                ]
+            },
+            "error": {
+                "code": "0",
+                "message": "Sin error"
+            }
+        },
+        "related": {
+            "places": [301, 302, 303, 304],
+            "articles": [101, 102, 103, 104]
+        }
+    }
+]

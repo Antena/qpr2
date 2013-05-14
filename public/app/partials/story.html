@@ -29,14 +29,14 @@
                 <option ng-repeat="event in events | orderBy:eventSorter" value="{{ event.date }}">{{ event.date }}</option>
             </select>
 
+            <div id="timeline"></div>
+
             <h6>Eventos hasta el: {{ currentdate }}</h6>
-            <div id="timeline">
-                <ul class="unstyled">
-                    <li ng-repeat="event in eventsUntil(currentdate) | orderBy:eventSorter">
-                        {{ event.type }} : {{ event.date }}
-                    </li>
-                </ul>
-            </div>
+            <ul class="unstyled">
+                <li ng-repeat="event in eventsUntil(currentdate) | orderBy:eventSorter">
+                    {{ event.type }} : {{ event.date }}
+                </li>
+            </ul>
         </div>
         <div class="span3">
             <div id="entity-details">

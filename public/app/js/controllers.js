@@ -161,6 +161,21 @@ angular.module('qpr2.controllers', []).
             }
         ];
 
+        // Milestones
+        $scope.milestones = [
+            {
+                id: 401,
+                date: "21/03/2006",
+                source: "Sitio Web AySA",
+                topics: [
+                    { name: "AySA", labelClass: "label-inverse" },
+                    { name: "Plan director de sanamiento", labelClass: "label-inverse" }
+                ],
+                title: "Creación de AySA, Agua y Saneamientos Argentinos",
+                description: "El 21 de marzo de 2006 el Gobierno Nacional creaba AySA, encomendándole la ejecución del Plan Director, un programa de obras de saneamiento."
+            }
+        ]
+
         // Story
         $scope.story = {
             title: "Planta potabilizadora Almirante Brown",
@@ -177,7 +192,8 @@ angular.module('qpr2.controllers', []).
             { type: "article", date: "21/03/2013", data: $scope.articles[0] },
             { type: "article", date: "03/05/2011", data: $scope.articles[1] },
             { type: "article", date: "22/09/2011", data: $scope.articles[2] },
-            { type: "article", date: "05/03/2011", data: $scope.articles[3] }
+            { type: "article", date: "05/03/2011", data: $scope.articles[3] },
+            { type: "milestone", date: "21/03/2006", data: $scope.milestones[0] }
         ];
 
         // Get events

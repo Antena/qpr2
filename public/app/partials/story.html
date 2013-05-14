@@ -60,8 +60,17 @@
 
 <script>
     $(function() {
-        console.log("loaded");        //TODO(gb): Remove trace!!!
-        timeline.create();
+        // Init timeline
+        timeline.create({
+            height: 100,
+            width: $("#timeline").width(),
+            margin: {
+                top: 40,
+                right: 10,
+                bottom: 40,
+                left: 0
+            }
+        });
 
         // Init map
         mapper.init();

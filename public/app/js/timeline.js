@@ -1,83 +1,88 @@
-(function(){
-    timeline = {}
-    timeline.options={
-        height:100,
-        width:1000,
-        margin: {top: 40, right: 40, bottom: 40, left:40}
-    }
+(function() {
 
-    var self = timeline;
-    timeline.create = function () {
-        var height=timeline.options.height;
-        var width=timeline.options.width;
-        var margin = timeline.options.margin;
+    timeline = {};
 
-        console.log([new Date('2013-03-03'), new Date('2013-03-05')]);
-        var x = d3.time.scale().domain([new Date('2011-03-20'), d3.time.month.offset(new Date('2013-04-20'), 1)]).rangeRound([0, width - margin.left - margin.right]);
+    var options = {
+        height: 100,
+        width: 1000,
+        margin: { top: 40, right: 40, bottom: 40, left:40 }
+    };
+
+    var svg, x;
+
+    timeline.create = function (settings) {
+
+        options = $.extend(options, settings);
+
+        x = d3.time.scale()
+            .domain([new Date('2006-03-21'), new Date('2013-05-14')])
+            .rangeRound([0, options.width - options.margin.left - options.margin.right]);
+
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient('bottom')
-            .ticks(d3.time.months, 1)
+            .ticks(d3.time.months, 6)
             .tickFormat(d3.time.format('%m/%y'))
             .tickSize(1);
 
-        var svg = d3.select("#timeline")
+        svg = d3.select("#timeline")
             .append("svg")
-            .attr("width", timeline.options.width)
-            .attr("height", timeline.options.height)
+            .attr("width", options.width)
+            .attr("height", options.height)
             .append('g')
-            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+            .attr('transform', 'translate(' + options.margin.left + ', ' + options.margin.top + ')');
 
 
         svg.append("g")
-            .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
+            .attr('transform', 'translate(0, ' + (options.height - options.margin.top - options.margin.bottom) + ')')
             .call(xAxis);
-
-        self.svg = svg;
-        self.x=x;
     }
-
 
     timeline.update = function (events) {
 
+        // Group events by month and calculate y-index
         var allEvents = [];
-        var eventsByDate = d3.nest().key(function(d){
+        var eventsByDate = d3.nest().key(function(d) {
             var eventDate = moment(d.data.date, "DD/MM/YYYY");
-            var day=new Date(eventDate);
-            return new Date(day.getFullYear(), day.getMonth(), day.getDate());
+            var day = new Date(eventDate);
+            return new Date(day.getFullYear(), day.getMonth(), 1);
         }).entries(events);
-
-        for(var i=0; i<eventsByDate.length; i++) {
-            var count=0;
+        for (var i=0; i<eventsByDate.length; i++) {
             var dayEvents = eventsByDate[i].values;
-            for(var j=0;j<dayEvents.length;j++) {
-                var e=dayEvents[j];
-                e.dayIndex=j;
+            for (var j=0; j<dayEvents.length; j++) {
+                var e = dayEvents[j];
+                e.yIndex = e.type == "report" ? 1 : -(j+1);
                 allEvents.push(e);
             }
         }
 
-
-        var objs=timeline.svg
+        // Data Join
+        var objs = svg
             .selectAll('.events')
             .data(allEvents);
 
+        // Enter
+        objs.enter()
+            .append('rect');
 
-        objs.enter().append('rect')
+        // Enter + Update
+        svg.selectAll('rect')
             .attr('x',function(d){
                 var eventDate = moment(d.data.date, "DD/MM/YYYY");
-                return timeline.x(new Date(eventDate));
+                return x(new Date(eventDate));
             })
             .attr('y',function(d){
-                return timeline.options.height - timeline.options.margin.top - timeline.options.margin.bottom - (10*(1+ d.dayIndex)) ;
+                return options.height - options.margin.top - options.margin.bottom - (15*d.yIndex) ;
             })
             .attr('width', 10)
             .attr('height', function(d) { return 8 })
             .attr('class','events');
 
-        objs.exit().transition().duration(500).remove();
-
-
+        // Exit
+        objs.exit()
+            .transition()
+            .duration(500)
+            .remove();
     }
 
 

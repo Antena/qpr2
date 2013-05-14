@@ -5,7 +5,7 @@
         map             = null,
         user            = "belbo",
         table           = "qpr2",
-        date            = '1900-05-13',
+        visibleIds      = [],
         cartodbLayer    = null,
         zoom            = 13,
         lat             = -34.857623,
@@ -18,8 +18,10 @@
     }
 
     var sqlQuery = function() {
-        return "SELECT * FROM qpr2";
-//        return "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
+        var select = "SELECT * FROM qpr2";
+        var where = visibleIds.length > 0 ? "WHERE cartodb_id IN (" + visibleIds.join(",") + ")" : "WHERE cartodb_id = -1";
+        var query = select + " " + where;
+        return  query;
     }
 
     mapper.init = function(divId, settings) {
@@ -70,9 +72,8 @@
         });
     }
 
-    mapper.setDate = function(currentDate) {
-        var currentDateParts = currentDate.split("/");
-        date = currentDateParts[2] + "-" + currentDateParts[1] + "-" + currentDateParts[0] + " 23:59:59";
+    mapper.setVisible = function(ids) {
+        visibleIds = ids;
         cartodbLayer.setQuery(sqlQuery());
     }
 })()

@@ -116,8 +116,10 @@ angular.module('qpr2.controllers', []).
                         "message": "Sin error"
                     }
                 },
-                relatedPlaces: [301, 302, 303, 304],
-                relatedArticles: [101,102,103,104]
+                related: {
+                    places: [301, 302, 303, 304],
+                    articles: [101,102,103,104]
+                }
             }
         ];
 
@@ -188,26 +190,39 @@ angular.module('qpr2.controllers', []).
 
         // Timeline events
         $scope.events = [
-            { type: "report", date: "25/03/2013", data: $scope.reports[0] },
-            { type: "article", date: "21/03/2013", data: $scope.articles[0] },
-            { type: "article", date: "03/05/2011", data: $scope.articles[1] },
-            { type: "article", date: "22/09/2011", data: $scope.articles[2] },
-            { type: "article", date: "05/03/2011", data: $scope.articles[3] },
-            { type: "milestone", date: "21/03/2006", data: $scope.milestones[0] }
+            { type: "report", date: $scope.reports[0].date, data: $scope.reports[0] },
+            { type: "article", date: $scope.articles[0].date, data: $scope.articles[0] },
+            { type: "article", date: $scope.articles[1].date, data: $scope.articles[1] },
+            { type: "article", date: $scope.articles[2].date, data: $scope.articles[2] },
+            { type: "article", date: $scope.articles[3].date, data: $scope.articles[3] },
+            { type: "milestone", date: $scope.milestones[0].date, data: $scope.milestones[0] }
         ];
 
         // Get events
         $scope.eventsUntil = function(date) {
             var currentDate = moment(date, dateFormat);
 
-            if (date) {
-                mapper.setDate(date);
-            }
-
             var events = $scope.events.filter(function(event) {
                 var eventDate = moment(event.date, dateFormat);
                 return eventDate.isBefore(currentDate) || eventDate.isSame(currentDate);
             });
+
+            if (events.length > 0) {
+                var placeCartodbIds = [];
+                for (var i=0; i<events.length; i++) {
+                    var event = events[i];
+                    if (event.type == "place") {
+                        placeCartodbIds.push(event.data.cartodb_id);
+                    }
+                    if (event.data.related && event.data.related.places) {
+                        var relatedPlaces = event.data.related.places;
+                        for (var j=0; j<relatedPlaces.length; j++) {
+                            placeCartodbIds.push(getEntity("places", relatedPlaces[j]).cartodb_id);
+                        }
+                    }
+                }
+                mapper.setVisible(placeCartodbIds);
+            }
 
             timeline.update(events);
 
@@ -218,6 +233,13 @@ angular.module('qpr2.controllers', []).
         $scope.eventSorter = function(event) {
             return moment(event.date, dateFormat).unix();
         };
+
+        // Utility functions
+        function getEntity(entity, id) {
+            return  $scope[entity].filter(function (entity) {
+                return entity.id == id;
+            })[0];
+        }
 
     }])
     .controller('MyCtrl2', [function() {

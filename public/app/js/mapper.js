@@ -37,7 +37,7 @@
         map = new google.maps.Map(document.getElementById("map"), cartodbMapOptions);
 
         var mapStyle = [{
-            stylers: [{ saturation: -65 }, { gamma: 1.52 }] }, {
+            stylers: [{ saturation: -65 }, { gamma: 0.52 }] }, {
             featureType: "administrative", stylers: [{ saturation: -95 }, { gamma: 2.26 }] }, {
             featureType: "water", elementType: "labels", stylers: [{ visibility: "off" }] }, {
             featureType: "administrative.locality", stylers: [{ visibility: 'off' }] }, {
@@ -65,7 +65,6 @@
                     qpr2.select(data);
                 }
             }
-
         }, function(layer) {
             cartodbLayer = layer;
             map.overlayMapTypes.setAt(0, layer);

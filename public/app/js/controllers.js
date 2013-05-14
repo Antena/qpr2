@@ -4,11 +4,9 @@
 
 angular.module('qpr2.controllers', []).
     controller('StoryController', ['$scope', '$http', function($scope, $http) {
-        var
-            cartodbUrlHead  = "http://belbo.cartodb.com/api/v2/sql?q=",
-            dateFormat      = "DD/MM/YYYY";
+        var dateFormat      = "DD/MM/YYYY";
 
-        $scope.selected = null;
+        $scope.step = null;
 
         // Articles
         $scope.articles = [
@@ -174,7 +172,10 @@ angular.module('qpr2.controllers', []).
                     { name: "Plan director de sanamiento", labelClass: "label-inverse" }
                 ],
                 title: "Creación de AySA, Agua y Saneamientos Argentinos",
-                description: "El 21 de marzo de 2006 el Gobierno Nacional creaba AySA, encomendándole la ejecución del Plan Director, un programa de obras de saneamiento."
+                description: "El 21 de marzo de 2006 el Gobierno Nacional creaba AySA, encomendándole la ejecución del Plan Director, un programa de obras de saneamiento.",
+                related: {
+                    places: [301]
+                }
             }
         ]
 
@@ -190,12 +191,12 @@ angular.module('qpr2.controllers', []).
 
         // Timeline events
         $scope.events = [
-            { type: "report", date: $scope.reports[0].date, data: $scope.reports[0] },
-            { type: "article", date: $scope.articles[0].date, data: $scope.articles[0] },
-            { type: "article", date: $scope.articles[1].date, data: $scope.articles[1] },
-            { type: "article", date: $scope.articles[2].date, data: $scope.articles[2] },
-            { type: "article", date: $scope.articles[3].date, data: $scope.articles[3] },
-            { type: "milestone", date: $scope.milestones[0].date, data: $scope.milestones[0] }
+            { step: 0, type: "milestone", date: $scope.milestones[0].date, data: $scope.milestones[0] },
+            { step: 1, type: "article", date: $scope.articles[1].date, data: $scope.articles[1] },
+            { step: 2, type: "article", date: $scope.articles[2].date, data: $scope.articles[2] },
+            { step: 3, type: "article", date: $scope.articles[3].date, data: $scope.articles[3] },
+            { step: 4, type: "article", date: $scope.articles[0].date, data: $scope.articles[0] },
+            { step: 5, type: "report", date: $scope.reports[0].date, data: $scope.reports[0] }
         ];
 
         // Get events
@@ -227,6 +228,31 @@ angular.module('qpr2.controllers', []).
             timeline.update(events);
 
             return events;
+        }
+
+        $scope.step = function() {
+            var events = $scope.events.filter(function(event) {
+                return event.step <= step.value;
+            });
+
+            if (events.length > 0) {
+                var placeCartodbIds = [];
+                for (var i=0; i<events.length; i++) {
+                    var event = events[i];
+                    if (event.type == "place") {
+                        placeCartodbIds.push(event.data.cartodb_id);
+                    }
+                    if (event.data.related && event.data.related.places) {
+                        var relatedPlaces = event.data.related.places;
+                        for (var j=0; j<relatedPlaces.length; j++) {
+                            placeCartodbIds.push(getEntity("places", relatedPlaces[j]).cartodb_id);
+                        }
+                    }
+                }
+                mapper.setVisible(placeCartodbIds);
+            }
+
+            timeline.update(events);
         }
 
         // Event Sorter

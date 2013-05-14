@@ -44,3 +44,26 @@
     font-family: Arial, sans-serif;
     font-size: 10px;
 }
+
+.playback {
+    z-index: 10000;
+    position: relative;
+    top: 250px;
+    padding: 10px;
+    background: rgba(255,255,255,0.8);
+    border: solid 1px rgba(255,255,255, 1.0);
+}
+
+a.playback:hover {
+    background-color: rgba(70, 130, 180, 0.30);
+    border: solid 1px rgba(70, 130, 180, 0.35);
+}
+
+.playback[data-action="prev"] {
+    float: left;
+    left: 1px;
+}
+
+.playback[data-action="next"] {
+    float: right;
+}

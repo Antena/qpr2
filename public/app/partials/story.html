@@ -22,21 +22,17 @@
 
     <div class="row-fluid">
         <div class="span9">
-            <div id="map">
-
+            <input type="hidden" id="step" ng-model="currentstep" style="display: none">
+            <div style="float: left; height: 0px; width: 100%">
+                <a ng-click="step(currentstep)" href="#" class="playback" data-action="prev">
+                    <i class="icon-backward"/>
+                </a>
+                <a ng-click="step(currentstep)" href="#" class="playback" data-action="next">
+                    <i class="icon-forward"/>
+                </a>
             </div>
-            <select ng-model="currentdate">
-                <option ng-repeat="event in events | orderBy:eventSorter" value="{{ event.date }}">{{ event.date }}</option>
-            </select>
-
+            <div id="map"></div>
             <div id="timeline"></div>
-
-            <h6>Eventos hasta el: {{ currentdate }}</h6>
-            <ul class="unstyled">
-                <li ng-repeat="event in eventsUntil(currentdate) | orderBy:eventSorter">
-                    {{ event.type }} : {{ event.date }}
-                </li>
-            </ul>
         </div>
         <div class="span3">
             <div id="entity-details">
@@ -55,7 +51,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -74,6 +69,26 @@
 
         // Init map
         mapper.init();
+
+        // Playback
+        var dates = ["21/03/2006","03/05/2011","22/09/2011","25/02/2013","05/03/2013","21/03/2013"];
+        $(".playback").click(function(event) {
+            event.preventDefault();
+            var action = $(this).attr("data-action");
+            var step = null;
+
+            if ($("#step").val() == "") {
+                step = 0;
+            } else if (action == "next") {
+                step = Math.min(parseInt($("#step").val()) + 1, dates.length - 1);
+            } else if (action == "prev") {
+                step = Math.max(parseInt($("#step").val()) - 1, 0);
+            }
+
+            $("#step").val(step);
+            $("#currentdate").val(dates[step]);
+            $("#currentdate").trigger("keydown");
+        });
     })
 </script>
 

@@ -18,7 +18,8 @@
     }
 
     var sqlQuery = function() {
-        return "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
+        return "SELECT * FROM qpr2";
+//        return "SELECT * FROM qpr2 WHERE timestamp <= DATE '" + date + "'";
     }
 
     mapper.init = function(divId, settings) {

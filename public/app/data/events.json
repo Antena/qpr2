@@ -19,20 +19,20 @@
     },
     {
         "step": 3,
+        "type": "report",
+        "date": "25/02/2013",
+        "data": "201"
+    },
+    {
+        "step": 4,
         "type": "article",
         "date": "05/03/2013",
         "data": "104"
     },
     {
-        "step": 4,
+        "step": 5,
         "type": "article",
         "date": "21/03/2013",
         "data": "101"
-    },
-    {
-        "step": 5,
-        "type": "report",
-        "date": "21/03/2013",
-        "data": "201"
     }
 ]

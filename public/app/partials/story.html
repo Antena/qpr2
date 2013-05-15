@@ -35,17 +35,37 @@
             <div id="timeline"></div>
         </div>
         <div class="span3">
-            <div id="entity-details" ng-show="currentEvent">
+            <div id="entity-details">
 
                 <div ng-switch on="currentEventType" >
-                    <div ng-switch-when="milestone">
-                        {{ currentEvent | json }}
+                    <div class="inner" ng-switch-when="milestone">
+                        <p class="date">{{ currentEvent.data.date }}</p>
+                        <span class="label label-inverse">Hito</span>
+                        <h5>{{ currentEvent.data.title }}</h5>
+                        <p>{{ currentEvent.data.description }}</p>
                     </div>
-                    <div ng-switch-when="article">
-                        {{ currentEvent | json }}
+                    <div class="inner" ng-switch-when="article">
+                        <p class="date">{{ currentEvent.data.date }}</p>
+                        <span class="label label-inverse">Noticia</span>
+                        <h5>{{ currentEvent.data.title }}</h5>
+                        <p>{{ currentEvent.data.description }}</p>
+                        <ul class="unstyled" ng-show="currentEvent.data.topics">
+                            <li ng-repeat="topic in story.topics">
+                                <span class="label {{ topic.labelClass }}">{{ topic.name }}</span>
+                            </li>
+                        </ul>
+                        <p><a href="{{ currentEvent.data.link }}" target="_blank">Ver artículo</a> ({{ currentEvent.data.source }})</p>
                     </div>
-                    <div ng-switch-when="report">
-                        {{ currentEvent | json }}
+                    <div class="inner" ng-switch-when="report">
+                        <p class="date">{{ currentEvent.date }}</p>
+                        <span class="label label-inverse">Reporte</span>
+                        <h5>{{ currentEvent.data.report.payload.incidents[0].incident.incidenttitle }}</h5>
+                        <p>{{ currentEvent.data.report.payload.incidents[0].incident.incidentdescription }}</p>
+                        <p><a href="{{ currentEvent.data.report.payload.domain}}/reports/view/{{ currentEvent.data.report.payload.incidents[0].incident.incidentid }}">Ver reporte completo</a></p>
+                    </div>
+                    <div class="inner" ng-switch-default>
+                        <p>Estás viendo el hotspot <strong>{{ story.title }}</strong></p>
+                        <p>Utilizá las felchas para avanzar en el tiempo y ver cómo se llegó al problema</p>
                     </div>
                 </div>
             </div>
@@ -56,8 +76,8 @@
             <div class="realted-entities">
                 <ul class="unstyled">
                     <li ng-repeat="article in currentEventRelated" class="related-item">
-                        <p class="article-date">{{ article.date }}</p>
-                        <h6 class="article-title">{{ article.title }}</h6>
+                        <p class="date">{{ article.date }}</p>
+                        <h6 class="title">{{ article.title }}</h6>
                     </li>
                 </ul>
             </div>

@@ -10,6 +10,10 @@
     border: solid 1px #CCCCCC;
 }
 
+#entity-details .inner {
+    padding: 10px;
+}
+
 .floating-title {
     text-align: center;
     text-transform: uppercase;
@@ -29,7 +33,7 @@
     border-top: solid 1px #CCCCCC;
 }
 
-.article-date {
+.date {
     color: #aaa;
     font-size: 12px;
 }

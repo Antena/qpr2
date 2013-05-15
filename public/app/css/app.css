@@ -70,3 +70,23 @@ a.playback:hover {
 .playback[data-action="next"] {
     float: right;
 }
+
+.hover-window{
+    position:absolute;
+    width:150px;
+    font-family: Helvetica,sans-serif;
+    font-size:12px;
+    text-align: center;
+    padding:5px;
+    background-color:rgb(255,255,255);
+    background-color:rgba(255,255,255,.85);
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    behavior: url(border-radius.htc);
+    z-index:99999;
+    display: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

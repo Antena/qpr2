@@ -24,6 +24,14 @@
         return  query;
     }
 
+    var infowindowTemplate = _.template('<div class="infowindow">' +
+        '<div class="infowindow-wrapper">' +
+        '<div class="infowindow-content">' +
+        '<h4><%= name %></h4>' +
+        '</div>' +
+        '</div>' +
+        '</div>');
+
     mapper.init = function(divId, settings) {
         // Define the basic map options
         var cartodbMapOptions = {
@@ -60,10 +68,7 @@
                 user_name : "belbo",
                 table_name : "qpr2",
                 query: sqlQuery(),
-                interactivity: 'cartodb_id,type',
-                featureClick : function(e, latlng, pos, data) {
-                    qpr2.select(data);
-                }
+                interactivity: 'cartodb_id,type'
             }
         }, function(layer) {
             cartodbLayer = layer;

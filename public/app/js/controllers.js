@@ -141,7 +141,6 @@ angular.module('qpr2.controllers', ['qpr2.services']).
                 $scope.currentEventType = $scope.currentEvent.type;
 
                 var relatedArticles = [];
-                console.log($scope.currentEvent);
                 if ($scope.currentEvent.data.related && $scope.currentEvent.data.related.articles) {
                     $scope.currentEvent.data.related.articles.map(function(id) {
 

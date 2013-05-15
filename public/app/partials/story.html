@@ -35,15 +35,27 @@
             <div id="timeline"></div>
         </div>
         <div class="span3">
-            <div id="entity-details">
+            <div id="entity-details" ng-show="currentEvent">
+
+                <div ng-switch on="currentEventType" >
+                    <div ng-switch-when="milestone">
+                        {{ currentEvent | json }}
+                    </div>
+                    <div ng-switch-when="article">
+                        {{ currentEvent | json }}
+                    </div>
+                    <div ng-switch-when="report">
+                        {{ currentEvent | json }}
+                    </div>
+                </div>
             </div>
-            <div class="floating-title">
+            <div class="floating-title" ng-show="currentEventRelated">
                 <h5>Entidades relacionadas</h5>
                 <i class="icon-chevron-down"></i>
             </div>
             <div class="realted-entities">
                 <ul class="unstyled">
-                    <li ng-repeat="article in articles" class="related-item">
+                    <li ng-repeat="article in currentEventRelated" class="related-item">
                         <p class="article-date">{{ article.date }}</p>
                         <h6 class="article-title">{{ article.title }}</h6>
                     </li>

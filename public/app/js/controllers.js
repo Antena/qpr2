@@ -47,6 +47,8 @@ angular.module('qpr2.controllers', ['qpr2.services']).
             $scope.events=data;
         });
 
+        $scope.currentEventType = null;
+
         $scope.fixedEvents=false;
 
         $scope.fixEvents = function () {
@@ -134,6 +136,21 @@ angular.module('qpr2.controllers', ['qpr2.services']).
                         }
                     }
                 }
+
+                $scope.currentEvent = events[events.length - 1];
+                $scope.currentEventType = $scope.currentEvent.type;
+
+                var relatedArticles = [];
+                console.log($scope.currentEvent);
+                if ($scope.currentEvent.data.related && $scope.currentEvent.data.related.articles) {
+                    $scope.currentEvent.data.related.articles.map(function(id) {
+
+                        relatedArticles.push(getEntity("articles", id));
+                    })
+                }
+
+                $scope.currentEventRelated = relatedArticles.length == 0 ? null : relatedArticles;
+
                 mapper.setVisible(placeCartodbIds);
             }
 

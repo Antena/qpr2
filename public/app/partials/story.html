@@ -1,8 +1,17 @@
 <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>
+                Monitoreo Social del Saneamiento de la Cuenca Matanza Riachuelo<br/>
+                Fortaleciendo la voz y la acción local
+            </h1>
+            <hr/>
+        </div>
+    </div>
 
     <div class="row-fluid">
         <div class="span12">
-            <h1>{{ story.title }}</h1>
+            <h2>{{ story.title }}</h2>
         </div>
     </div>
 
@@ -54,7 +63,7 @@
                                 <span class="label {{ topic.labelClass }}">{{ topic.name }}</span>
                             </li>
                         </ul>
-                        <p><a href="{{ currentEvent.data.link }}" target="_blank">Ver artículo</a> ({{ currentEvent.data.source }})</p>
+                        <p><a href="{{ currentEvent.data.link }}" target="_blank">Ver artículo</a> (Fuente: {{ currentEvent.data.source }})</p>
                     </div>
                     <div class="inner" ng-switch-when="report">
                         <p class="date">{{ currentEvent.date }}</p>
@@ -64,20 +73,22 @@
                         <p><a href="{{ currentEvent.data.report.payload.domain}}/reports/view/{{ currentEvent.data.report.payload.incidents[0].incident.incidentid }}">Ver reporte completo</a></p>
                     </div>
                     <div class="inner" ng-switch-default>
-                        <p>Estás viendo el hotspot <strong>{{ story.title }}</strong></p>
+                        <p>Estás viendo el reporte sobre la <strong>{{ story.title }}</strong></p>
                         <p>Utilizá las felchas para avanzar en el tiempo y ver cómo se llegó al problema</p>
                     </div>
                 </div>
             </div>
             <div class="floating-title" ng-show="currentEventRelated">
-                <h5>Entidades relacionadas</h5>
+                <h5>Información relacionada</h5>
                 <i class="icon-chevron-down"></i>
             </div>
             <div class="realted-entities">
                 <ul class="unstyled">
                     <li ng-repeat="article in currentEventRelated" class="related-item">
                         <p class="date">{{ article.date }}</p>
+                        <span class="label label-inverse">Noticia</span>
                         <h6 class="title">{{ article.title }}</h6>
+                        <p><a href="{{ article.link }}" target="_blank">Ver artículo</a></p>
                     </li>
                 </ul>
             </div>

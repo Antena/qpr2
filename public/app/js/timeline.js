@@ -76,7 +76,30 @@
             })
             .attr('width', 10)
             .attr('height', function(d) { return 8 })
-            .attr('class','events');
+            .attr('class','events')
+            .tooltip(function(d,i){
+                var content=$("<div></div>")
+                var tooltip = $("<div id='tooltipData'></div>");
+                if(d.type=="article"){
+
+                }
+                tooltip.append("<p class='date'>" + d.date + "<p>" );
+                tooltip.append("<p class='title'>" + d.data.title +"</p>");
+                content.append(tooltip);
+                return{
+                    class: "timelineTooltip",
+                    type: "fixed",
+                    gravity: "right",
+                    content: content.html(),
+                    displacement: [20,20],
+                    show:function(){
+                        return true
+                    },
+                    updateContent:function(){
+                    }
+                };
+
+            });
 
         // Exit
         objs.exit()

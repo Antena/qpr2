@@ -51,7 +51,7 @@
             var dayEvents = eventsByDate[i].values;
             for (var j=0; j<dayEvents.length; j++) {
                 var e = dayEvents[j];
-                e.yIndex = e.type == "report" ? 1 : -(j+1);
+                e.yIndex = e.type == "report" ? 1.5 : -(j+1);
                 allEvents.push(e);
             }
         }
@@ -69,18 +69,17 @@
         // Enter + Update
         svg.selectAll('image')
             .attr('xlink:href',function(d){
-                return 'img/' + d.type  + '-icon.jpg';
-                //'http://www.aqc.it/it/images/stories/pdf_icon_2012_jpg.jpg'
+                return 'img/' + d.type  + '-icon.png';
             })
             .attr('x',function(d){
                 var eventDate = moment(d.data.date, "DD/MM/YYYY");
                 return x(new Date(eventDate));
             })
             .attr('y',function(d){
-                return options.height - options.margin.top - options.margin.bottom - (15*d.yIndex) ;
+                return options.height - options.margin.top - options.margin.bottom - (24 * d.yIndex) ;
             })
-            .attr('width', 15)
-            .attr('height', function(d) { return 10 })
+            .attr('width', 24)
+            .attr('height', 24)
             .attr('class','events')
             .tooltip(function(d,i){
                 var content=$("<div></div>")

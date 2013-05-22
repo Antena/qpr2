@@ -63,10 +63,15 @@
 
         // Enter
         objs.enter()
-            .append('rect');
+            .append('image');
+
 
         // Enter + Update
-        svg.selectAll('rect')
+        svg.selectAll('image')
+            .attr('xlink:href',function(d){
+                return 'img/' + d.type  + '-icon.jpg';
+                //'http://www.aqc.it/it/images/stories/pdf_icon_2012_jpg.jpg'
+            })
             .attr('x',function(d){
                 var eventDate = moment(d.data.date, "DD/MM/YYYY");
                 return x(new Date(eventDate));
@@ -74,8 +79,8 @@
             .attr('y',function(d){
                 return options.height - options.margin.top - options.margin.bottom - (15*d.yIndex) ;
             })
-            .attr('width', 10)
-            .attr('height', function(d) { return 8 })
+            .attr('width', 15)
+            .attr('height', function(d) { return 10 })
             .attr('class','events')
             .tooltip(function(d,i){
                 var content=$("<div></div>")
